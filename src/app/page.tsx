@@ -398,7 +398,7 @@ export default function Home() {
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
           <p className={styles.footerText}>
-            Built with <span className={styles.footerHeart}>♥</span> by James Cedeño · 2025
+            Built by James Cedeño · 2025
           </p>
           <p className={styles.footerSub}>Next.js · TypeScript · Vercel</p>
         </div>
