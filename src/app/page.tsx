@@ -154,6 +154,13 @@ export default function Home() {
               <button className={styles.btnPrimary} onClick={() => scrollTo("experience")}>
                 View Experience
               </button>
+               <a
+                  href="/James_Cedeno_Resume.pdf"
+                  download="James_Cedeno_Resume.pdf"
+                  className={styles.btnDownload}
+                >
+                  ↓ Download CV
+                </a>
                 <a
                   href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeData.contact.email}&su=Hello&body=Hi%20there`}
                   target="_blank"
