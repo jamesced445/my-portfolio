@@ -80,7 +80,7 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <a href={`mailto:${resumeData.contact.email}`} className={styles.navCta}>
+          <a className={styles.navCta} onClick={() => scrollTo("contact")}>
             Hire Me
           </a>
           <button className={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)}>
@@ -153,8 +153,13 @@ export default function Home() {
               <button className={styles.btnPrimary} onClick={() => scrollTo("experience")}>
                 View Experience
               </button>
-              <a href={`mailto:${resumeData.contact.email}`} className={styles.btnOutline}>
-                Get In Touch
+                <a
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${resumeData.contact.email}&su=Hello&body=Hi%20there`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.btnOutline}
+                >
+                Send Email
               </a>
             </div>
           </div>
