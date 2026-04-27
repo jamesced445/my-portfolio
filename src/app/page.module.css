@@ -312,6 +312,28 @@
   transform: translateY(-2px);
 }
 
+.btnDownload {
+  background: rgba(0, 229, 255, 0.08);
+  color: var(--accent);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 8px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btnDownload:hover {
+  background: rgba(0, 229, 255, 0.15);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 229, 255, 0.15);
+}
+
 /* Hero Card */
 .heroLeft {
   animation: fadeUp 0.8s ease 0.3s both;
