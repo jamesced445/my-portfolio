@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { resumeData, projectsData } from "./data";
 import styles from "./page.module.css";
+import Chatbot from "./components/Chatbot";
 
 const NAV_LINKS = ["About", "Experience", "Projects", "Skills", "Education", "Contact"];
 
@@ -408,6 +409,9 @@ export default function Home() {
           <p className={styles.footerSub}>Next.js · TypeScript · Vercel</p>
         </div>
       </footer>
+
+      {/* CHATBOT — fixed overlay, no layout impact */}
+      <Chatbot />
     </div>
   );
 }
