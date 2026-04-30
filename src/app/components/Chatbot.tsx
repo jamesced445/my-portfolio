@@ -37,57 +37,46 @@ const GREETINGS = ["hi", "hello", "hey", "good morning", "good afternoon", "good
 function getResponse(input: string): string {
   const q = input.toLowerCase().trim();
 
-  // Greetings
   if (GREETINGS.some((g) => q === g || q.startsWith(g + " ") || q.startsWith(g + "!"))) {
     return `Hey there! 👋 I'm James' portfolio assistant. Ask me anything about James — his skills, experience, projects, education, or how to contact him!`;
   }
 
-  // Who are you / about the bot
   if (/(who are you|what are you|about (this )?bot|are you (an )?ai|are you (a )?chatbot)/i.test(q)) {
     return `I'm a portfolio assistant for **${KB.name}**. I can answer questions about James' skills, work experience, projects, education, and contact info. What would you like to know?`;
   }
 
-  // Name
   if (/(what.*(his|your) name|who is (this|james|he)|introduce|full name)/i.test(q)) {
     return `His full name is **${KB.name}**. He's a ${KB.title} based in the Philippines with 6+ years of professional experience.`;
   }
 
-  // Age / birthday
   if (/(age|old|born|birthday|birth)/i.test(q)) {
     return `James is **${KB.age}**. 🎂`;
   }
 
-  // Title / role / position
   if (/(title|role|position|job|what does he do|profession|developer|engineer)/i.test(q)) {
     return `James is a **${KB.title}**. He specializes in building enterprise web apps, REST APIs, and mobile applications — primarily with the .NET ecosystem and C#.`;
   }
 
-  // Summary / about / profile
   if (/(summary|about|profile|overview|tell me about|background|who is)/i.test(q)) {
     return `📋 **About James:**\n\n${KB.summary}`;
   }
 
-  // Contact — email
   if (/(email|gmail|mail)/i.test(q)) {
     return `📧 You can reach James at **${KB.email}**`;
   }
 
-  // Contact — phone
   if (/(phone|mobile|number|call|contact number)/i.test(q)) {
     return `📱 James' phone number is **${KB.phone}**`;
   }
 
-  // Contact — location
   if (/(location|based|where|city|address|place|live|reside|relocation)/i.test(q)) {
     return `📍 James is based in **${KB.location}**`;
   }
 
-  // Contact — general
   if (/(contact|reach|hire|available|open to work|get in touch)/i.test(q)) {
     return `You can get in touch with James via:\n\n📧 **Email:** ${KB.email}\n📱 **Phone:** ${KB.phone}\n📍 **Location:** ${KB.location}\n\nHe's currently **open for work** — full-time roles, freelance, and collaborations!`;
   }
 
-  // Skills — specific
   if (/(c#|csharp|\.net|dotnet|asp\.net|net core)/i.test(q)) {
     return `💻 C# and .NET are James' core strengths — he has **6+ years** of experience with ASP.NET, .NET Core MVC, and .NET Core API (with Swagger). It's the backbone of his professional career.`;
   }
@@ -113,14 +102,12 @@ function getResponse(input: string): string {
     return `💳 James built **multiple payment systems** — integrating GCash, Maya, LandBank, DBP, and Visa/Mastercard. He developed both a hospital billing system and a Unified Payment Gateway for government use.`;
   }
 
-  // Skills — general
   if (/(skill|tech|stack|know|language|framework|expertise|proficient|technology)/i.test(q)) {
     const topSkills = KB.skills.filter((s) => s.years >= 3).map((s) => `**${s.name}** (${s.years}yrs)`);
     const otherSkills = KB.skills.filter((s) => s.years < 3).map((s) => s.name);
     return `🛠️ **James' Tech Stack:**\n\n**Core Skills (6+ years):**\n${topSkills.join(" · ")}\n\n**Also knows:** ${otherSkills.join(", ")}`;
   }
 
-  // Experience — specific companies
   if (/(boldr|back.?end engineer)/i.test(q)) {
     const exp = KB.experience.find((e) => /boldr/i.test(e.company));
     if (exp) return `🏢 **${exp.role} @ ${exp.company}** (${exp.period})\n📍 ${exp.location}\n\n${exp.highlights.map((h) => `▸ ${h}`).join("\n")}`;
@@ -142,25 +129,21 @@ function getResponse(input: string): string {
     if (exp) return `🏢 **${exp.role} @ ${exp.company}** (${exp.period})\n📍 ${exp.location}\n\n${exp.highlights.map((h) => `▸ ${h}`).join("\n")}`;
   }
 
-  // Experience — general
   if (/(experience|work history|career|companies|employer|worked|previous job|job history)/i.test(q)) {
     return `💼 **James has worked at ${KB.experience.length} companies:**\n\n${KB.experience
       .map((e) => `• **${e.role}** @ ${e.company} *(${e.period})*`)
       .join("\n")}\n\nAsk me about any specific company for more details!`;
   }
 
-  // Current job
   if (/(current|latest|recent|now|present|nowadays)/i.test(q)) {
     const latest = KB.experience[0];
     return `🏢 James' most recent role is **${latest.role}** at **${latest.company}** (${latest.period}) in ${latest.location}.`;
   }
 
-  // Years of experience
   if (/(how many years|years of experience|how long|experience years)/i.test(q)) {
     return `James has **6+ years** of professional experience in software development, working across healthcare, government, insurance, and fintech sectors.`;
   }
 
-  // Projects — specific
   if (/(hris|human resource|attendance|payroll)/i.test(q)) {
     const p = KB.projects.find((proj) => /hris/i.test(proj.name));
     if (p) return `🏗️ **${p.name}** — ${p.description}\n\n**Key features:** ${p.features.join(" · ")}\n\n**Tech:** ${p.tech?.join(", ")}`;
@@ -198,46 +181,38 @@ function getResponse(input: string): string {
     if (p) return `🏗️ **${p.name}** — ${p.description}\n\n**Key features:** ${p.features.join(" · ")}\n\n**Tech:** ${p.tech?.join(", ")}`;
   }
 
-  // Projects — general
   if (/(project|built|developed|portfolio|work|app|system|application)/i.test(q)) {
     return `🚀 **James has built ${KB.projects.length} major projects:**\n\n${KB.projects
       .map((p) => `• **${p.name}** *(${p.category})* — ${p.description.slice(0, 60)}...`)
       .join("\n")}\n\nAsk me about any specific project for full details!`;
   }
 
-  // Education
   if (/(education|degree|school|university|college|study|studied|graduate|aclc|bs it|information technology)/i.test(q)) {
     return `🎓 **Education:**\n\n**${KB.education.degree}**\n${KB.education.school}\n📍 ${KB.education.location} · ${KB.education.period}`;
   }
 
-  // References
   if (/(reference|referral|recommend|vouch|contact person)/i.test(q)) {
     return `📋 **References:**\n\n${KB.references
       .map((r) => `• **${r.name}** — ${r.company} (${r.contact})`)
       .join("\n")}`;
   }
 
-  // Open to work / hire
   if (/(hire|hiring|available|open to|looking for|job|opportunity|offer|freelance|full.?time|remote)/i.test(q)) {
     return `✅ Yes! James is **currently open** for full-time roles, freelance projects, and collaborations.\n\n📧 Reach him at **${KB.email}**\n📱 Or call **${KB.phone}**\n\nHe's open to relocation from Koronadal City, South Cotabato.`;
   }
 
-  // Salary / rate
   if (/(salary|rate|pay|compensation|how much|budget)/i.test(q)) {
     return `💬 Salary and rate details are best discussed directly with James.\n\n📧 Email: **${KB.email}**\n📱 Phone: **${KB.phone}**`;
   }
 
-  // Thanks / bye
   if (/(thank|thanks|thank you|appreciated|bye|goodbye|see you|ciao|cheers)/i.test(q)) {
     return `You're welcome! Feel free to come back anytime. 😊 Don't hesitate to reach out to James directly at **${KB.email}** if you have more questions!`;
   }
 
-  // Help
   if (/(help|what can you|what do you know|topics|ask|menu|options)/i.test(q)) {
     return `Here's what I can tell you about James:\n\n👤 **About** — summary, age, title\n💼 **Experience** — 5 companies, roles & highlights\n🚀 **Projects** — 11 built systems\n🛠️ **Skills** — tech stack & expertise\n🎓 **Education** — degree & school\n📞 **Contact** — email, phone, location\n📋 **References** — professional contacts\n\nJust ask naturally — e.g. *"What projects has he built?"* or *"Is James available for hire?"*`;
   }
 
-  // Out of scope
   return `❌ I can only answer questions about **James Cedeño's portfolio** — his skills, experience, projects, education, and contact info.\n\nTry asking: *"What are his skills?"*, *"Tell me about his experience"*, or *"How can I contact him?"*`;
 }
 
@@ -270,7 +245,7 @@ export default function Chatbot() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const IDLE_MS = 5 * 60 * 1000; // 5 minutes
+  const IDLE_MS = 5 * 60 * 1000;
 
   const resetIdleTimer = useCallback(() => {
     if (idleTimer.current) clearTimeout(idleTimer.current);
@@ -305,21 +280,11 @@ export default function Chatbot() {
     if (open) setTimeout(() => inputRef.current?.focus(), 300);
   }, [open]);
 
-//   useEffect(() => {
-//   const hasVisited = sessionStorage.getItem("chatbot_seen");
-
-//   if (!hasVisited) {
-//     setTimeout(() => {
-//       setOpen(true);
-//       sessionStorage.setItem("chatbot_seen", "true");
-//     }, 800); // small delay feels smoother
-//   }
-// }, []);
-useEffect(() => {
-  setTimeout(() => {
-    setOpen(true);
-  }, 800);
-}, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setOpen(true);
+    }, 800);
+  }, []);
 
   const sendMessage = (text: string) => {
     if (!text.trim() || ended) return;
@@ -331,7 +296,6 @@ useEffect(() => {
     setInput("");
     setTyping(true);
 
-    // Simulate typing delay
     const delay = 600 + Math.random() * 600;
     setTimeout(() => {
       const response = getResponse(text);
@@ -365,7 +329,6 @@ useEffect(() => {
     resetIdleTimer();
   };
 
-  // Render markdown-lite: bold, line breaks
   const renderText = (text: string) =>
     text.split("\n").map((line, i) => {
       const parts = line.split(/(\*\*[^*]+\*\*)/g).map((part, j) => {
@@ -389,8 +352,8 @@ useEffect(() => {
         onClick={() => setOpen((o) => !o)}
         style={{
           position: "fixed",
-          bottom: "32px",
-          right: "32px",
+          bottom: "24px",        // ← was 32px
+          right: "16px",         // ← was 32px
           zIndex: 1000,
           width: "64px",
           height: "64px",
@@ -420,7 +383,6 @@ useEffect(() => {
             style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%", borderRadius: "50%" }}
           />
         )}
-        {/* Pulse ring */}
         {!open && (
           <span style={{
             position: "absolute",
@@ -434,26 +396,29 @@ useEffect(() => {
       </button>
 
       {/* ── Chat Window ── */}
-      <div style={{
-        position: "fixed",
-        bottom: "108px",
-        right: "32px",
-        zIndex: 999,
-        width: "380px",
-        maxHeight: "580px",
-        display: "flex",
-        flexDirection: "column",
-        background: "#0e0e17",
-        border: "1px solid rgba(0,229,255,0.15)",
-        borderRadius: "20px",
-        overflow: "hidden",
-        boxShadow: "0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04)",
-        transition: "all 0.35s cubic-bezier(0.34,1.56,0.64,1)",
-        transformOrigin: "bottom right",
-        transform: open ? "scale(1) translateY(0)" : "scale(0.85) translateY(20px)",
-        opacity: open ? 1 : 0,
-        pointerEvents: open ? "all" : "none",
-      }}>
+      <div
+        data-chatwindow
+        style={{
+          position: "fixed",
+          bottom: "100px",                              // ← was 108px
+          right: "12px",                                // ← was 32px
+          zIndex: 999,
+          width: "min(380px, calc(100vw - 24px))",      // ← was 380px (fixed)
+          maxHeight: "580px",
+          display: "flex",
+          flexDirection: "column",
+          background: "#0e0e17",
+          border: "1px solid rgba(0,229,255,0.15)",
+          borderRadius: "16px",                         // ← was 20px
+          overflow: "hidden",
+          boxShadow: "0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04)",
+          transition: "all 0.35s cubic-bezier(0.34,1.56,0.64,1)",
+          transformOrigin: "bottom right",
+          transform: open ? "scale(1) translateY(0)" : "scale(0.85) translateY(20px)",
+          opacity: open ? 1 : 0,
+          pointerEvents: open ? "all" : "none",
+        }}
+      >
         {/* Header */}
         <div style={{
           padding: "16px 20px",
@@ -693,6 +658,11 @@ useEffect(() => {
         @keyframes chatDot {
           0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
           30% { transform: translateY(-4px); opacity: 1; }
+        }
+        @media (max-width: 480px) {
+          [data-chatwindow] {
+            max-height: calc(100dvh - 120px) !important;
+          }
         }
       `}</style>
     </>

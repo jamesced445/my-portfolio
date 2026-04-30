@@ -211,14 +211,15 @@
 
 .heroName {
   font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 46px);
+  font-size: clamp(24px, 4vw, 46px);
   font-weight: 705;
   line-height: 1.1;
   letter-spacing: -1.5px;
   color: var(--accent);
   animation: fadeUp 0.6s ease 0.1s both;
   margin-bottom: 16px;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .heroSummary {
@@ -267,6 +268,7 @@
 
 .heroCtas {
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
   animation: fadeUp 0.6s ease 0.5s both;
 }
@@ -1069,11 +1071,17 @@
 @media (max-width: 900px) {
   .heroContent {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 40px;
   }
 
   .heroLeft {
-    display: none;
+    display: flex;
+    justify-content: center;
+  }
+
+  .heroCard {
+    max-width: 400px;
+    width: 100%;
   }
 
   .navLinks, .navCta {
@@ -1137,5 +1145,26 @@
 
   .skillsGrid, .projectsGrid {
     grid-template-columns: 1fr;
+  }
+
+    .heroCtas {
+    flex-direction: column;
+  }
+
+  .btnPrimary,
+  .btnDownload,
+  .btnOutline {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+  }
+    .heroCard {
+    padding: 24px;
+  }
+
+  .heroAvatar {
+    width: 110px;
+    height: 110px;
   }
 }
